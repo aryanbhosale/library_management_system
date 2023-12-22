@@ -5,8 +5,15 @@ const Book = require("../models/book"); // Import the Book model
 const libraryTransactionController = {
   getAllTransactions: async (req, res) => {
     try {
-      const transactions = await LibraryTransaction.find();
-      res.json(transactions);
+      if (req.user.role === "admin") {
+        // If the user is an admin, fetch all transactions
+        const transactions = await LibraryTransaction.find().populate('user').populate('book');
+        res.json(transactions);
+      } else if (req.user.role === "user") {
+        // If the user is a regular user, fetch transactions of that particular user
+        const transactions = await LibraryTransaction.find({ user: req.user._id }).populate('user').populate('book');
+        res.json(transactions);
+      }
     } catch (err) {
       res.status(500).json({ message: err.message });
     }

@@ -68,13 +68,6 @@
     - Params: -
     - Body: -
 
-## 2. Get all transactions
-
-    - Method: GET
-    - Endpoint: /libraryTransactions
-    - Params: -
-    - Body: -
-
 
 # D. After authentication - only for User
 ### These routes can be used by only user upon authentication
@@ -100,6 +93,13 @@
                 "book": "String: Book ID",
                 "transactionType": "returned"(ALWAYS)
             }
+
+## 3. Get all transactions for the user
+
+    - Method: GET
+    - Endpoint: /libraryTransactions
+    - Params: -
+    - Body: -
 
 
 # E. After authentication - only for Admin
@@ -146,4 +146,11 @@
     - Method: DELETE
     - Endpoint: /libraryTransactions/:id
     - Params: id of the transaction(return/borrow)
+    - Body: -
+
+## 6. Get all transactions
+
+    - Method: GET
+    - Endpoint: /libraryTransactions
+    - Params: -
     - Body: -

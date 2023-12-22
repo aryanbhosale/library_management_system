@@ -24,7 +24,7 @@ function authenticateUser(req, res, next) {
     };
   }  
 
-// Get all transactions (accessible by both admin and user)
+// Get all transactions (accessible by both admin(for all users) and user(for the particular user))
 router.get('/', authenticateUser, libraryTransactionController.getAllTransactions);
 
 // Create a book request (borrow) - accessible only by users
