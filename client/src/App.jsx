@@ -3,11 +3,13 @@ import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import SignIn from "./pages/SignIn/SignIn";
 import SignUp from "./pages/SignUp/SignUp";
 import Library from "./pages/Library/Library";
+import Transactions from "./pages/Transactions/Transactions";
 import { loginAPI } from "./api";
 import axios from "axios";
 
 function App() {
   const [user, setUser] = useState(null);
+  console.log("USER:", user);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -60,6 +62,7 @@ function App() {
         <Route path="/signin" element={<Navigate to="/" />} />
         <Route path="/signup" element={<Navigate to="/" />} />
         <Route path="/" element={<Library user={user} onLogout={handleLogout} />} />
+        <Route path="/transactions" element={<Transactions user={user} onLogout={handleLogout} />} />
       </Routes>
     );
   }

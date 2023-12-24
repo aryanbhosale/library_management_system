@@ -1,6 +1,7 @@
 const express = require("express");
 const session = require("express-session");
 const morgan = require("morgan");
+const cors = require("cors");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const bodyParser = require("body-parser");
@@ -48,6 +49,11 @@ passport.deserializeUser(async (id, done) => {
 
 const app = express();
 
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}));
+
 // Use express-session middleware
 app.use(
   session({
@@ -68,11 +74,12 @@ app.use(bodyParser.json());
 
 // CORS handling
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Origin", "http://localhost:5173");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
   );
+  res.header("Access-Control-Allow-Credentials", "true"); // Set to 'true' for credential requests
   if (req.method === "OPTIONS") {
     res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
     return res.status(200).json({});

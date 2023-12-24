@@ -7,7 +7,17 @@ export const loginAPI = async (username, password) => {
     const response = await axios.post(`${BASE_URL}/login`, {
       username,
       password,
+    }, {
+      withCredentials: true, // Ensure credentials are included in the request
     });
+
+    // Extract and handle the received cookie
+    const receivedCookie = response.headers['set-cookie'];
+
+    // Process the cookie if needed
+    // For example, you can set it in local storage or handle it based on your requirements
+
+    console.log("RESPONSE: ", response);
     return response.data;
   } catch (error) {
     throw new Error(error.response.data.message);
