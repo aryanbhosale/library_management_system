@@ -1,11 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Transaction = ({ user, onLogout }) => {
+  const [transactions, setTransactions] = useState([]);
+
   const handleLogout = () => {
-    // Call the logout function passed from the parent component
     onLogout();
   };
+
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/libraryTransactions", {
+          params: { user: user._id }, // Pass the user ID as a query parameter
+          withCredentials: true,
+        });
+        setTransactions(response.data);
+      } catch (error) {
+        console.error("Error fetching transactions:", error);
+      }
+    };
+    fetchTransactions();
+  }, [user]); // Fetch transactions when the user changes
 
   return (
     <div>
@@ -27,7 +44,19 @@ const Transaction = ({ user, onLogout }) => {
           </button>
         </div>
       </nav>
-      {/* Other Transaction content */}
+      {/* Display Transactions */}
+      <div className="container mx-auto mt-8 md:px-6">
+        <h2 className="text-2xl font-semibold mb-4">Your Transactions</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {transactions.map((transaction) => (
+            <div key={transaction._id} className="border p-4 rounded-md mb-4">
+              <p>Book: {transaction.book.name}</p>
+              <p>Type: {transaction.transactionType}</p>
+              <p>Date: {transaction.dueDate}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
