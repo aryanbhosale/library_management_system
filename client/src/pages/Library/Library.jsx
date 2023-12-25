@@ -26,7 +26,7 @@ const Library = ({ user, onLogout }) => {
 
     try {
       const response = await axios.post(
-        "librarymanagementsystem-production-9b04.up.railway.app/libraryTransactions/requestBook",
+        "https://librarymanagementsystem-production-9b04.up.railway.app/libraryTransactions/requestBook",
         {
           user: user._id,
           book: selectedBook._id,
@@ -63,7 +63,7 @@ const Library = ({ user, onLogout }) => {
 
   const handleDeleteBook = async (id) => {
     try {
-      const response = await axios.delete(`librarymanagementsystem-production-9b04.up.railway.app/books/${id}`, {
+      const response = await axios.delete(`https://librarymanagementsystem-production-9b04.up.railway.app/books/${id}`, {
         withCredentials: true,
       });
       fetchBooks();
@@ -75,7 +75,7 @@ const Library = ({ user, onLogout }) => {
   const handleAddBook = async () => {
     try {
       const response = await axios.post(
-        "librarymanagementsystem-production-9b04.up.railway.app/books",
+        "https://librarymanagementsystem-production-9b04.up.railway.app/books",
         newBookData,
         {
           withCredentials: true,
@@ -90,7 +90,7 @@ const Library = ({ user, onLogout }) => {
 
   const fetchBooks = async () => {
     try {
-      const response = await axios.get("librarymanagementsystem-production-9b04.up.railway.app/books", {
+      const response = await axios.get("https://librarymanagementsystem-production-9b04.up.railway.app/books", {
         withCredentials: true,
       });
       setBooks(response.data);
@@ -102,7 +102,7 @@ const Library = ({ user, onLogout }) => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get("librarymanagementsystem-production-9b04.up.railway.app/books", {
+        const response = await axios.get("https://librarymanagementsystem-production-9b04.up.railway.app/books", {
           withCredentials: true,
         });
         setBooks(response.data);
