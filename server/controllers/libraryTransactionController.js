@@ -1,4 +1,3 @@
-// controllers/libraryTransactionController.js
 const LibraryTransaction = require("../models/libraryTransaction");
 const Book = require("../models/book"); // Import the Book model
 

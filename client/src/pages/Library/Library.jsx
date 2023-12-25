@@ -35,7 +35,6 @@ const Library = ({ user, onLogout }) => {
           withCredentials: true, // Include credentials in the request
         }
       );
-      console.log("Request successful:", response.data);
       // Update the availability status locally upon successful request
       const updatedBooks = books.map((book) =>
         book._id === selectedBook._id
@@ -45,7 +44,6 @@ const Library = ({ user, onLogout }) => {
       setBooks(updatedBooks);
     } catch (error) {
       console.error("Error requesting book:", error);
-      // Handle error cases if needed
     }
     // Close the modal after request
     setShowModal(false);
@@ -56,7 +54,6 @@ const Library = ({ user, onLogout }) => {
       const response = await axios.delete(`http://localhost:3000/books/${id}`, {
         withCredentials: true,
       });
-      console.log("Book deleted:", response.data);
       fetchBooks();
     } catch (error) {
       console.error("Error deleting book:", error);
@@ -72,7 +69,6 @@ const Library = ({ user, onLogout }) => {
           withCredentials: true,
         }
       );
-      console.log("Book added:", response.data);
       setShowAddModal(false);
       fetchBooks();
     } catch (error) {
@@ -201,7 +197,6 @@ const Library = ({ user, onLogout }) => {
                     Delete Book
                   </button>
                 ) : (
-                  // Render a message or placeholder when the book is not available
                   null
                 )}
               </div>

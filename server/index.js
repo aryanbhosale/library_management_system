@@ -18,8 +18,7 @@ passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
       const user = await User.findOne({ username });
-        console.log("NOT USER: ", !user);
-        console.log("NOT VALID PASS: ", !(await user.validPassword(password)));
+       
 
       if (!user || !(await user.validPassword(password))) {
         return done(null, false, {

@@ -1,4 +1,3 @@
-// models/libraryTransaction.js
 const mongoose = require('mongoose');
 
 const libraryTransactionSchema = new mongoose.Schema({

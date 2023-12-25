@@ -9,7 +9,6 @@ import axios from "axios";
 
 function App() {
   const [user, setUser] = useState(null);
-  console.log("USER:", user);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,7 +37,6 @@ function App() {
 
   const handleLogout = async () => {
     try {
-      // Make a GET request to your logout endpoint or API route
       await axios.get(`http://localhost:3000/logout`, {
         withCredentials: true, // Ensure credentials are included in the request
       });
@@ -51,11 +49,9 @@ function App() {
       document.cookie = "connect.sid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   
       // Redirect or navigate the user to the login/sign-in page
-      // You can use the routing method suitable for your app, such as navigate from reach/router or other routing methods
       navigate('/signin', { replace: true });
     } catch (error) {
       console.error('Logout failed:', error);
-      // Handle logout failure if needed
     }
   };
 

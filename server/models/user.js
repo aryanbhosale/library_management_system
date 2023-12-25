@@ -36,10 +36,8 @@ user.methods.validPassword = async function (password) {
       if (!this.password) {
         return false; // Handle case where password is not set
       }
-      console.log("THIS: ", this);
-      console.log("PASSWORD: ", password);
+      
       const match = await bcrypt.compare(password, this.password);
-      console.log("MATCH: ", match);
       return match; // Returns true if passwords match, false otherwise
     } catch (error) {
       throw new Error(error);

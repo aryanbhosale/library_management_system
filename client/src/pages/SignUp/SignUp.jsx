@@ -17,7 +17,6 @@ const SignUp = () => {
     e.preventDefault();
     try {
       const response = await signupAPI(formData);
-      console.log("Signup successful:", response);
 
       setFormData({
         username: "",
@@ -32,7 +31,6 @@ const SignUp = () => {
       navigate('/'); // Redirect to the home page on successful signup
     } catch (error) {
       console.error("Signup failed:", error);
-      // Handle signup failure
     }
   };
 

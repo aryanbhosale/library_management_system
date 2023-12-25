@@ -1,4 +1,3 @@
-// controllers/userController.js
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const saltRounds = 1; // Number of salt rounds for bcrypt
@@ -16,7 +15,6 @@ const userController = {
     try {
       // Generate a salt and hash the password
       const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
-      console.log("HASHEDPASSWORD: ", hashedPassword);
       const newUser = new User({
         username: req.body.username,
         password: hashedPassword, // Store the hashed password

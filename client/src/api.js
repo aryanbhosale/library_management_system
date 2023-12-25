@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:3000"; // Replace with your backend API URL
+const BASE_URL = "http://localhost:3000"; // Replace with the backend API URL
 
 export const loginAPI = async (username, password) => {
   try {
@@ -11,13 +11,9 @@ export const loginAPI = async (username, password) => {
       withCredentials: true, // Ensure credentials are included in the request
     });
 
-    // Extract and handle the received cookie
+    // Extract and handle the received cookie if needed
     const receivedCookie = response.headers['set-cookie'];
 
-    // Process the cookie if needed
-    // For example, you can set it in local storage or handle it based on your requirements
-
-    console.log("RESPONSE: ", response);
     return response.data;
   } catch (error) {
     throw new Error(error.response.data.message);
@@ -48,5 +44,3 @@ export const signupAPI = async (userData) => {
     }
   }
 };
-
-// Other API functions for interacting with your backend...

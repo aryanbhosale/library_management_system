@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const libraryTransactionController = require('../controllers/libraryTransactionController');
 
-// Sample middleware for authentication
 function authenticateUser(req, res, next) {
     // Check if user is authenticated
     if (req.isAuthenticated()) {
@@ -12,7 +11,6 @@ function authenticateUser(req, res, next) {
     }
   }
   
-  // Sample middleware for authorization based on user roles
   function authorizeUser(role) {
     return function(req, res, next) {
       // Check if the authenticated user has the required role

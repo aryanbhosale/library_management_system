@@ -57,7 +57,6 @@ const Transaction = ({ user, onLogout }) => {
       setTransactions(updatedTransactions);
     } catch (error) {
       console.error("Error approving book request:", error);
-      // Handle error cases if needed
     }
   };
 
@@ -75,7 +74,6 @@ const Transaction = ({ user, onLogout }) => {
         }
       );
       // Handle the returned book data as needed after a successful return
-      console.log("Book returned:", response.data);
       // Update the transactions after book return
       const updatedTransactions = transactions.map((transaction) =>
         transaction.user._id === userId && transaction.book._id === bookId
@@ -85,11 +83,9 @@ const Transaction = ({ user, onLogout }) => {
       setTransactions(updatedTransactions);
     } catch (error) {
       console.error("Error returning book:", error);
-      // Handle error cases if needed
     }
   };
 
-  console.log("TX: ", transactions);
 
   return (
     <div>
