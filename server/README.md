@@ -85,7 +85,7 @@
 
 ## 2. Return a borrowed book that was approved by admin - can only do after due date which is 2 days after the date of borrow
 
-    - Method: GET
+    - Method: PUT
     - Endpoint: /libraryTransactions/returnBook
     - Params: -
     - Body: {
