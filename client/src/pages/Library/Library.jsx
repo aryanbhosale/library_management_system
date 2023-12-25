@@ -121,7 +121,7 @@ const Library = ({ user, onLogout }) => {
       <nav className="flex justify-between items-center bg-gray-800 text-white p-4">
         <div>
           <h2 className="text-lg font-semibold">
-            Welcome, {user.role === "admin" ? `${user.role}` : `${user.name}`}!
+            Welcome, {user.role === "admin" ? `Admin` : `${user.name}`}!
           </h2>
         </div>
         <div className="flex items-center space-x-4">

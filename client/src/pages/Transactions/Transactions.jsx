@@ -96,8 +96,7 @@ const Transaction = ({ user, onLogout }) => {
       <nav className="flex justify-between items-center bg-gray-800 text-white p-4">
         <div>
           <h2 className="text-lg font-semibold">
-            {user.role === "admin" ? `${user.role}` : `${user.name}`} - Your
-            Transactions
+            {user.role === "admin" ? `Admin - All Transactions` : `${user.name} - Your Transactions`} 
           </h2>
         </div>
         <div className="flex items-center space-x-4">
