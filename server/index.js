@@ -49,7 +49,7 @@ passport.deserializeUser(async (id, done) => {
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: 'https://library-management-system-ashen.vercel.app',
   credentials: true
 }));
 
@@ -73,7 +73,7 @@ app.use(bodyParser.json());
 
 // CORS handling
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:5173");
+  res.header("Access-Control-Allow-Origin", "https://library-management-system-ashen.vercel.app");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
