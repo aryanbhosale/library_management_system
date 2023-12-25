@@ -99,17 +99,25 @@ app.post("/login", (req, res, next) => {
     if (!user) {
       return res.status(401).json({ message: "Authentication failed" });
     }
-    req.logIn(user, (err) => {
+    req.logIn(user, async (err) => {
       if (err) {
         return res.status(500).json({ message: "Internal Server Error" });
       }
+      // Set the 'connect.sid' cookie in the response
+      const sessionCookie = req.session.cookie;
+      res.cookie('connect.sid', req.sessionID, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "strict",
+        path: "/",
+        expires: new Date(Date.now() + sessionCookie.maxAge), // Set expiration based on session cookie
+      });
       // Return user details and success message
-      return res
-        .status(200)
-        .json({ message: "Authentication successful", user });
+      return res.status(200).json({ message: "Authentication successful", user });
     });
   })(req, res, next);
 });
+
 
 app.get("/logout", (req, res) => {
   // Clear the session and destroy it
