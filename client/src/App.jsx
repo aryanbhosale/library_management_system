@@ -48,7 +48,7 @@ function App() {
 
   const handleLogout = async () => {
     try {
-      await axios.get(`http://localhost:3000/logout`, {
+      await axios.get(`librarymanagementsystem-production-9b04.up.railway.app/logout`, {
         withCredentials: true, // Ensure credentials are included in the request
       });
   

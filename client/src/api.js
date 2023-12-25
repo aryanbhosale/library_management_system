@@ -2,7 +2,7 @@ import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
 
-const BASE_URL = "http://localhost:3000"; // Replace with the backend API URL
+const BASE_URL = "librarymanagementsystem-production-9b04.up.railway.app"; // Replace with the backend API URL
 
 export const loginAPI = async (username, password) => {
   try {
