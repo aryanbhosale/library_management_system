@@ -113,6 +113,16 @@ const Transaction = ({ user, onLogout }) => {
       {/* Display Transactions */}
       <div className="container mx-auto mt-8 md:px-6">
         <h2 className="text-2xl font-semibold mb-4">{user.role === "admin" ? "All Transactions" : "Your Transactions"}</h2>
+        {transactions.length === 0 ? ( // Check if transactions array is empty
+        <div className="flex flex-col items-center justify-center h-screen overflow-y-hidden">
+          <p className="text-4xl text-gray-500">
+            You have not made any transactions yet!
+          </p>
+          <p className="text-lg text-gray-500 mt-4">
+            Borrow a book to view transaction status.
+          </p>
+        </div>
+      ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {transactions.map((transaction) => (
             <div
@@ -166,6 +176,8 @@ const Transaction = ({ user, onLogout }) => {
             </div>
           ))}
         </div>
+      )}
+        
       </div>
     </div>
   );

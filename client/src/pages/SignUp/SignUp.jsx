@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { signupAPI } from "../../api"; // Import your API functions
+import { ToastContainer, toast } from "react-toastify";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -26,12 +27,17 @@ const SignUp = () => {
         contactNumber: "",
         role: "user",
       });
-
-      alert("Signup successful");
-      navigate('/'); // Redirect to the home page on successful signup
     } catch (error) {
-      console.error("Signup failed:", error);
-    }
+      toast.error("Invalid username or password!", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });    }
   };
 
   const handleChange = (e) => {
@@ -94,6 +100,7 @@ const SignUp = () => {
           >
             Sign Up
           </button>
+          <ToastContainer />
           <div className="w-full text-blue-500 text-center py-2 rounded-lg hover:underline focus:outline-none">
             <Link to="/signin">Go to Sign In</Link>
           </div>

@@ -1,4 +1,6 @@
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 const BASE_URL = "http://localhost:3000"; // Replace with the backend API URL
 
@@ -13,10 +15,20 @@ export const loginAPI = async (username, password) => {
 
     // Extract and handle the received cookie if needed
     const receivedCookie = response.headers['set-cookie'];
-
     return response.data;
+    
   } catch (error) {
-    throw new Error(error.response.data.message);
+    toast.error("Invalid username or password!", {
+      position: "bottom-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+    
   }
 };
 
@@ -28,19 +40,55 @@ export const signupAPI = async (userData) => {
         'Content-Type': 'application/json',
       },
     });
-
+    toast.success("Signup successful!", {
+      position: "bottom-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
     return response.data; // Return the response data
   } catch (error) {
     if (error.response) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx
-      throw new Error(error.response.data.message || 'Signup failed');
+      toast.error("Signup failed. All fields are required!", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     } else if (error.request) {
       // The request was made but no response was received
-      throw new Error('No response received from the server');
+      toast.error("No response received from the server.", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     } else {
       // Something happened in setting up the request that triggered an error
-      throw new Error('Error in making the request');
+      toast.error('Error in making the request', {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     }
   }
 };

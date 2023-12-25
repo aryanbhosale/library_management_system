@@ -6,6 +6,7 @@ import Library from "./pages/Library/Library";
 import Transactions from "./pages/Transactions/Transactions";
 import { loginAPI } from "./api";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -30,8 +31,18 @@ function App() {
       localStorage.setItem("user", JSON.stringify(response.user));
       setUser(response.user);
       navigate('/'); // Redirect to the home page on successful login
+      
     } catch (error) {
-      console.error("Login failed:", error);
+      toast.error("Invalid username or password!", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     }
   };
 
@@ -51,8 +62,16 @@ function App() {
       // Redirect or navigate the user to the login/sign-in page
       navigate('/signin', { replace: true });
     } catch (error) {
-      console.error('Logout failed:', error);
-    }
+      toast.error("Logout failed.", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });    }
   };
 
   // Conditional rendering based on user authentication status

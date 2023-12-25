@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 const SignIn = ({ onLogin }) => {
   const [username, setUsername] = useState("");
@@ -39,6 +40,7 @@ const SignIn = ({ onLogin }) => {
           <div className="w-full text-blue-500 text-center py-2 rounded-lg hover:underline focus:outline-none">
             <Link to="/signup">Go to Sign Up</Link>
           </div>
+          <ToastContainer />
         </form>
       </div>
     </div>
