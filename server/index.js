@@ -60,11 +60,7 @@ app.use(
     secret: "LIBRARYMANAGEMENTSYSTEMBACKEND", // Replace with your own secret key
     resave: false,
     saveUninitialized: false,
-    cookie: {
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "none",
-      maxAge: 24 * 60 * 60 * 1000, // Session max age in milliseconds (adjust as needed)
-    },
+    // Additional options as needed
   })
 );
 
@@ -126,7 +122,7 @@ app.get("/logout", (req, res) => {
       res.clearCookie("connect.sid", {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production", // Set secure flag based on environment
-        sameSite: "none",
+        sameSite: "strict", // Set the sameSite attribute as needed
         path: "/", // Path of the cookie
         expires: new Date(0), // Expire the cookie by setting the expiration to the past
       });
