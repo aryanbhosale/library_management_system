@@ -18,7 +18,6 @@ passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
       const user = await User.findOne({ username });
-       
 
       if (!user || !(await user.validPassword(password))) {
         return done(null, false, {
@@ -48,10 +47,12 @@ passport.deserializeUser(async (id, done) => {
 
 const app = express();
 
-app.use(cors({
-  origin: 'https://library-management-system-ashen.vercel.app',
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: "https://library-management-system-ashen.vercel.app",
+    credentials: true,
+  })
+);
 
 // Use express-session middleware
 app.use(
@@ -59,7 +60,11 @@ app.use(
     secret: "LIBRARYMANAGEMENTSYSTEMBACKEND", // Replace with your own secret key
     resave: false,
     saveUninitialized: false,
-    // Additional options as needed
+    cookie: {
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "none",
+      maxAge: 24 * 60 * 60 * 1000, // Session max age in milliseconds (adjust as needed)
+    },
   })
 );
 
@@ -73,7 +78,10 @@ app.use(bodyParser.json());
 
 // CORS handling
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://library-management-system-ashen.vercel.app");
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://library-management-system-ashen.vercel.app"
+  );
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
@@ -107,28 +115,27 @@ app.post("/login", (req, res, next) => {
   })(req, res, next);
 });
 
-app.get('/logout', (req, res) => {
+app.get("/logout", (req, res) => {
   // Clear the session and destroy it
   req.session.destroy((err) => {
     if (err) {
-      console.error('Error destroying session:', err);
-      res.status(500).json({ message: 'Logout failed' });
+      console.error("Error destroying session:", err);
+      res.status(500).json({ message: "Logout failed" });
     } else {
       // Clear the connect.sid cookie by setting its expiration to the past
-      res.clearCookie('connect.sid', {
+      res.clearCookie("connect.sid", {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production', // Set secure flag based on environment
-        sameSite: 'strict', // Set the sameSite attribute as needed
-        path: '/', // Path of the cookie
+        secure: process.env.NODE_ENV === "production", // Set secure flag based on environment
+        sameSite: "none",
+        path: "/", // Path of the cookie
         expires: new Date(0), // Expire the cookie by setting the expiration to the past
       });
 
-      res.status(200).json({ message: 'Logout successful' });
+      res.status(200).json({ message: "Logout successful" });
     }
   });
 });
 
-  
 // Import and use routes
 const bookRoutes = require("./routes/bookRoutes");
 const userRoutes = require("./routes/userRoutes");
