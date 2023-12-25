@@ -109,14 +109,25 @@ app.post("/login", (req, res, next) => {
 });
 
 app.get('/logout', (req, res) => {
-    req.logout((err) => {
-      if (err) {
-        return res.status(500).json({ message: 'Error logging out' });
-      }
-      res.status(200).json({ message: "Logout successful" });
-      //res.redirect('/login'); // Redirect to login page after logout
-    });
+  // Clear the session and destroy it
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('Error destroying session:', err);
+      res.status(500).json({ message: 'Logout failed' });
+    } else {
+      // Clear the connect.sid cookie by setting its expiration to the past
+      res.clearCookie('connect.sid', {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production', // Set secure flag based on environment
+        sameSite: 'strict', // Set the sameSite attribute as needed
+        path: '/', // Path of the cookie
+        expires: new Date(0), // Expire the cookie by setting the expiration to the past
+      });
+
+      res.status(200).json({ message: 'Logout successful' });
+    }
   });
+});
 
   
 // Import and use routes

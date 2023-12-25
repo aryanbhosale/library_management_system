@@ -38,12 +38,24 @@ function App() {
 
   const handleLogout = async () => {
     try {
-      await axios.get('/logout');
+      // Make a GET request to your logout endpoint or API route
+      await axios.get(`http://localhost:3000/logout`, {
+        withCredentials: true, // Ensure credentials are included in the request
+      });
+  
+      // Clear the user data in localStorage or state
       localStorage.removeItem('user');
       setUser(null);
+  
+      // Clear cookies related to the session
+      document.cookie = "connect.sid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  
+      // Redirect or navigate the user to the login/sign-in page
+      // You can use the routing method suitable for your app, such as navigate from reach/router or other routing methods
       navigate('/signin', { replace: true });
     } catch (error) {
       console.error('Logout failed:', error);
+      // Handle logout failure if needed
     }
   };
 
