@@ -7,6 +7,8 @@ const LocalStrategy = require("passport-local").Strategy;
 const bodyParser = require("body-parser");
 const connectDB = require("./db");
 const User = require("./models/user");
+const path = require('path');
+
 
 require("dotenv").config();
 
@@ -47,7 +49,8 @@ passport.deserializeUser(async (id, done) => {
 
 const app = express();
 
-app.use(express.static('/public/static'));
+path.resolve(__dirname, 'public')
+app.use(express.static(__dirname + '/public'));
 
 
 app.use(
