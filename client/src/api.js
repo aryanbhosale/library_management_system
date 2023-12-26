@@ -2,11 +2,9 @@ import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
 
-const BASE_URL = "https://librarymanagementsystem-production-9b04.up.railway.app"; // Replace with the backend API URL
-
 export const loginAPI = async (username, password) => {
   try {
-    const response = await axios.post(`${BASE_URL}/login`, {
+    const response = await axios.post("/login", {
       username,
       password,
     }, {
@@ -35,7 +33,7 @@ export const loginAPI = async (username, password) => {
 // This function makes a POST request to the signup endpoint using Axios
 export const signupAPI = async (userData) => {
   try {
-    const response = await axios.post(`${BASE_URL}/users`, userData, {
+    const response = await axios.post("/users", userData, {
       headers: {
         'Content-Type': 'application/json',
       },

@@ -1,6 +1,7 @@
 {
   "name": "library-management-system",
   "private": true,
+  "proxy": "https://library-management-system-u5ov.onrender.com",
   "version": "0.0.0",
   "type": "module",
   "scripts": {

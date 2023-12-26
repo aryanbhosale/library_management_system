@@ -13,7 +13,7 @@ const Transaction = ({ user, onLogout }) => {
     const fetchTransactions = async () => {
       try {
         const response = await axios.get(
-          "https://librarymanagementsystem-production-9b04.up.railway.app/libraryTransactions",
+          "/libraryTransactions",
           {
             params: { user: user._id }, // Pass the user ID as a query parameter
             withCredentials: true,
@@ -40,7 +40,7 @@ const Transaction = ({ user, onLogout }) => {
   const approveBookRequest = async (transactionId) => {
     try {
       await axios.put(
-        "https://librarymanagementsystem-production-9b04.up.railway.app/libraryTransactions/approveBookRequest",
+        "/libraryTransactions/approveBookRequest",
         {
           transactionId: transactionId,
         },
@@ -63,7 +63,7 @@ const Transaction = ({ user, onLogout }) => {
   const returnBook = async (userId, bookId) => {
     try {
       const response = await axios.put(
-        "https://librarymanagementsystem-production-9b04.up.railway.app/libraryTransactions/returnBook",
+        "/libraryTransactions/returnBook",
         {
           user: userId,
           book: bookId,

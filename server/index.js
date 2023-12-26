@@ -7,6 +7,8 @@ const LocalStrategy = require("passport-local").Strategy;
 const bodyParser = require("body-parser");
 const connectDB = require("./db");
 const User = require("./models/user");
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 require("dotenv").config();
 
@@ -47,9 +49,14 @@ passport.deserializeUser(async (id, done) => {
 
 const app = express();
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use(express.static(__dirname+'/public'))
+
+
 app.use(
   cors({
-    origin: "https://library-management-system-ashen.vercel.app",
+    origin: "https://library-management-system-u5ov.onrender.com",
     credentials: true,
   })
 );
@@ -76,7 +83,7 @@ app.use(bodyParser.json());
 app.use((req, res, next) => {
   res.header(
     "Access-Control-Allow-Origin",
-    "https://library-management-system-ashen.vercel.app"
+    "https://library-management-system-u5ov.onrender.com"
   );
   res.header(
     "Access-Control-Allow-Headers",
