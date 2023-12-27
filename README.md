@@ -20,4 +20,4 @@
   - Add a book
   - Delete a book - can't delete book when it's borrowed/approved
   - View transactions of all users - borrow, approved, returned
-  - Approved transactions of all users
+  - Approve borrow requests of users
